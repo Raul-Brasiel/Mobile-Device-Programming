@@ -39,6 +39,7 @@ A simple, intuitive, and functional Android application developed in **Kotlin** 
 │   │   └── AndroidManifest.xml
 │   └── build.gradle.kts
 ├── build.gradle.kts
+└── README.md
 ```
 
 ---
@@ -46,7 +47,8 @@ A simple, intuitive, and functional Android application developed in **Kotlin** 
 ## 🚀 How to Run the Project
 
 1. **Clone this repository:**
-   ```bash
+   ```
+   git clone https://github.com/Raul-Brasiel/Mobile-Device-Programming.git
    ```
 
 2. **Open in Android Studio:**
