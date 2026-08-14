@@ -2,6 +2,8 @@
 
 A simple, intuitive, and functional Android application developed in **Kotlin** for dynamic counting with step/speed control, negative value prevention, and reset confirmation via dialogs (`AlertDialog`).
 
+![Logo do Projeto](Captura_de_tela.png)
+
 ---
 
 ## ✨ Features
