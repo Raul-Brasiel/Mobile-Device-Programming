@@ -44,13 +44,13 @@ A dynamic and interactive Android application developed in **Kotlin** for credit
 │   └── build.gradle.kts
 └── build.gradle.kts
 ---
-
+````
 ## 🚀 How to Run the Project
 
 1. **Clone this repository:**
    ```bash
    git clone https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git
-````
+
 
 2. **Open in Android Studio:**
    - Open Android Studio.
