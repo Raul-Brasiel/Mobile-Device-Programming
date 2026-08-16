@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    tools:ignore="ExtraText">
+
+    <FrameLayout android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView android:id="@+id/cardBack"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:rotationY="180"
+            android:visibility="invisible"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/color_card">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:background="#43464a"
+                />
+
+            <TextView android:id="@+id/textviewNumeroBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0000 0000 0000 0000"
+                android:textColor="@color/white"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="24dp"
+                android:layout_marginBottom="40dp"
+                />
+            <TextView android:id="@+id/textviewValidadeBack_Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Validade"
+                android:textSize="10dp"
+                android:textColor="@color/white"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="24dp"
+                android:layout_marginStart="24dp"
+                />
+            <TextView android:id="@+id/textviewValidadeBack_Date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MM/AA"
+                android:textSize="10sp"
+                android:textColor="@color/white"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="26dp"
+                android:layout_marginBottom="10dp"
+               />
+
+            <TextView android:id="@+id/textviewCvvBack_Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CVV"
+                android:textSize="10sp"
+                android:textColor="@color/white"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="100dp"
+                android:layout_marginBottom="24dp"
+                />
+            <TextView android:id="@+id/textviewCvvBack_Numero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="123"
+                android:textSize="10sp"
+                android:textColor="@color/white"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="100dp"
+                android:layout_marginBottom="10dp"
+                />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView android:id="@+id/cardFront"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/color_card">
+
+            <ImageView android:id="@+id/imageFlag"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_gravity="top|start"
+                android:layout_margin="15dp"
+                />
+
+            <ImageView android:id="@+id/imageSymbol"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="top|end"
+                android:layout_margin="15dp"
+
+                android:src="@drawable/sinal_creditcard"
+                />
+
+            <TextView android:id="@+id/textviewNomeFront"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NOME DO TITULAR"
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="24dp"
+                android:layout_marginStart="24dp"
+                />
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
+
+
+    <androidx.cardview.widget.CardView android:id="@+id/cardNome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginHorizontal="5dp"
+
+        app:cardCornerRadius="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card"
+        >
+
+        <EditText android:id="@+id/inputNome"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:hint="Nome do titular"
+            android:inputType="textPersonName|textCapCharacters"
+            android:paddingHorizontal="16dp"
+            />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView android:id="@+id/cardNumero"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="5dp"
+
+        app:cardCornerRadius="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardNome"
+        >
+
+        <EditText android:id="@+id/inputNumero"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:hint="Número do cartão"
+            android:inputType="number"
+            android:paddingHorizontal="16dp"
+            android:maxLength="19"
+            />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView android:id="@+id/cardValidade"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="5dp"
+
+        app:cardCornerRadius="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardNumero"
+        app:layout_constraintEnd_toStartOf="@id/cardCvv"
+        >
+
+        <EditText android:id="@+id/inputValidade"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:hint="Validade (MM/AA)"
+            android:inputType="date"
+            android:paddingHorizontal="16dp"
+            android:maxLength="5"
+            />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView android:id="@+id/cardCvv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="5dp"
+
+        app:cardCornerRadius="8dp"
+        app:layout_constraintStart_toEndOf="@id/cardValidade"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardNumero"
+        >
+
+        <EditText android:id="@+id/inputCvv"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:hint="CVV"
+            android:inputType="number"
+            android:paddingHorizontal="16dp"
+            android:maxLength="3"
+            />
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
