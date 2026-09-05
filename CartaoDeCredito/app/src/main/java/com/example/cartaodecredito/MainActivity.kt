@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         val scale = resources.displayMetrics.density
         card.cameraDistance = 8000 * scale
+
         var isFront = true
         var formatandoNumero = false
         var formatandoData = false
@@ -174,6 +175,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
         inputNumero.setOnFocusChangeListener { _, temFoco ->
             if (!temFoco) {
                 val textoDigitado = inputNumero.text.toString().trim()
