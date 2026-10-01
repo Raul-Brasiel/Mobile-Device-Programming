@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "577636335428",
+    "project_id": "sistema-de-autenticacao-mobile",
+    "storage_bucket": "sistema-de-autenticacao-mobile.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:577636335428:android:d807c28b08abaa6aeda111",
+        "android_client_info": {
+          "package_name": "dev.raul.sistemadeautenticacao"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaEoWtHrfyoIr6vsx0Q57uRKLGNAEnYGA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
