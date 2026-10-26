@@ -24,31 +24,27 @@ import dev.raul.jododavelhawithai.ui.theme.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.milliseconds
 
 @Composable
-fun JogoDaVelhaScreen(modifier: Modifier = Modifier) {
+fun JogoDaVelhaScreen(modifier: Modifier = Modifier){
     val coroutineScope = rememberCoroutineScope()
     var aiJob by remember { mutableStateOf<Job?>(null) }
 
-    // Estados do Modo e Dificuldade
     var modoJogo by rememberSaveable { mutableStateOf(ModoJogo.CONTRA_IA) }
     var dificuldadeIA by rememberSaveable { mutableStateOf(DificuldadeIA.FACIL) }
 
-    // Estado do Tabuleiro (9 posições)
     var tabuleiro by remember { mutableStateOf(List(9) { "" }) }
     var vezDoX by rememberSaveable { mutableStateOf(true) }
     var isAiThinking by remember { mutableStateOf(false) }
 
-    // Estado de Fim de Jogo
     var vencedor by remember { mutableStateOf<String?>(null) }
     var linhaVitoria by remember { mutableStateOf<List<Int>>(emptyList()) }
     var isEmpate by remember { mutableStateOf(false) }
 
-    // Diálogos
     var mostrarDialogoReset by remember { mutableStateOf(false) }
     var mostrarDialogoZerarPlacar by remember { mutableStateOf(false) }
 
-    // Placar persistente na sessão
     var vitoriasJogadorIA by rememberSaveable { mutableIntStateOf(0) }
     var vitoriasIA by rememberSaveable { mutableIntStateOf(0) }
     var empatesIA by rememberSaveable { mutableIntStateOf(0) }
@@ -57,7 +53,7 @@ fun JogoDaVelhaScreen(modifier: Modifier = Modifier) {
     var vitoriasPlayerO by rememberSaveable { mutableIntStateOf(0) }
     var empatesPvP by rememberSaveable { mutableIntStateOf(0) }
 
-    fun reiniciarPartida() {
+    fun reiniciarPartida(){
         aiJob?.cancel()
         tabuleiro = List(9) { "" }
         vezDoX = true
@@ -67,12 +63,12 @@ fun JogoDaVelhaScreen(modifier: Modifier = Modifier) {
         isEmpate = false
     }
 
-    fun onCellClick(index: Int) {
-        if (tabuleiro[index].isNotEmpty() || vencedor != null || isEmpate || isAiThinking) {
+    fun onCellClick(index: Int){
+        if(tabuleiro[index].isNotEmpty() || vencedor != null || isEmpate || isAiThinking){
             return
         }
 
-        if (modoJogo == ModoJogo.DOIS_JOGADORES) {
+        if(modoJogo == ModoJogo.DOIS_JOGADORES){
             val novoSimbolo = if (vezDoX) "X" else "O"
             val novoTabuleiro = tabuleiro.toMutableList()
             novoTabuleiro[index] = novoSimbolo
@@ -89,8 +85,8 @@ fun JogoDaVelhaScreen(modifier: Modifier = Modifier) {
             } else {
                 vezDoX = !vezDoX
             }
-        } else {
-            // Modo Contra IA: Jogador joga como X
+        }
+        else{
             val novoTabuleiro = tabuleiro.toMutableList()
             novoTabuleiro[index] = "X"
             tabuleiro = novoTabuleiro
@@ -100,30 +96,35 @@ fun JogoDaVelhaScreen(modifier: Modifier = Modifier) {
                 vencedor = resultadoJogador.vencedor
                 linhaVitoria = resultadoJogador.linhaVitoria
                 vitoriasJogadorIA++
-            } else if (resultadoJogador.isEmpate) {
+            }
+            else if(resultadoJogador.isEmpate){
                 isEmpate = true
                 empatesIA++
-            } else {
+            }
+            else{
                 vezDoX = false
                 isAiThinking = true
 
-                aiJob = coroutineScope.launch {
-                    delay(450)
+                aiJob = coroutineScope.launch{
+                    delay(450.milliseconds)
                     val jogadaIA = JogoDaVelhaLogic.obterJogadaIA(tabuleiro, dificuldadeIA)
-                    if (jogadaIA in 0..8 && tabuleiro[jogadaIA].isEmpty()) {
+
+                    if(jogadaIA in 0..8 && tabuleiro[jogadaIA].isEmpty()){
                         val tabuleiroAposIA = tabuleiro.toMutableList()
                         tabuleiroAposIA[jogadaIA] = "O"
                         tabuleiro = tabuleiroAposIA
 
                         val resultadoIA = JogoDaVelhaLogic.verificarResultado(tabuleiroAposIA)
-                        if (resultadoIA.temVencedor) {
+                        if(resultadoIA.temVencedor){
                             vencedor = resultadoIA.vencedor
                             linhaVitoria = resultadoIA.linhaVitoria
                             vitoriasIA++
-                        } else if (resultadoIA.isEmpate) {
+                        }
+                        else if(resultadoIA.isEmpate){
                             isEmpate = true
                             empatesIA++
-                        } else {
+                        }
+                        else{
                             vezDoX = true
                         }
                     }
@@ -133,11 +134,12 @@ fun JogoDaVelhaScreen(modifier: Modifier = Modifier) {
         }
     }
 
-    val (statusTexto, statusCor) = when {
+    val(statusTexto, statusCor) = when {
         vencedor != null -> {
-            val texto = if (modoJogo == ModoJogo.CONTRA_IA) {
-                if (vencedor == "X") "O jogador X venceu!" else "A IA venceu!"
-            } else {
+            val texto = if(modoJogo == ModoJogo.CONTRA_IA){
+                if(vencedor == "X") "O jogador X venceu!" else "A IA venceu!"
+            }
+            else{
                 "O jogador $vencedor venceu!"
             }
             val cor = if (vencedor == "X") PlayerXColor else PlayerOColor
@@ -158,8 +160,7 @@ fun JogoDaVelhaScreen(modifier: Modifier = Modifier) {
             .verticalScroll(scrollState)
             .padding(horizontal = 20.dp, vertical = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        // Título Principal (30sp conforme original)
+    ){
         Text(
             text = "Jogo da Velha",
             fontSize = 30.sp,
@@ -171,7 +172,6 @@ fun JogoDaVelhaScreen(modifier: Modifier = Modifier) {
 
         Spacer(modifier = Modifier.height(14.dp))
 
-        // Seletor de Modo de Jogo (Desafio 2)
         SeletorModoJogo(
             modoAtual = modoJogo,
             onModoSelected = { novoModo ->
@@ -182,7 +182,6 @@ fun JogoDaVelhaScreen(modifier: Modifier = Modifier) {
             }
         )
 
-        // Seletor de Dificuldade da IA (Desafio 1 - visível apenas no modo contra IA)
         if (modoJogo == ModoJogo.CONTRA_IA) {
             Spacer(modifier = Modifier.height(10.dp))
             SeletorDificuldade(
@@ -195,7 +194,6 @@ fun JogoDaVelhaScreen(modifier: Modifier = Modifier) {
 
         Spacer(modifier = Modifier.height(14.dp))
 
-        // Painel de Status da Partida (30sp conforme original)
         Text(
             text = statusTexto,
             fontSize = 30.sp,
@@ -206,7 +204,6 @@ fun JogoDaVelhaScreen(modifier: Modifier = Modifier) {
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        // Placar Persistente da Sessão (20sp conforme original)
         if (modoJogo == ModoJogo.CONTRA_IA) {
             Text(
                 text = "Jogador (X): $vitoriasJogadorIA",
@@ -249,7 +246,6 @@ fun JogoDaVelhaScreen(modifier: Modifier = Modifier) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Grade Composable 3x3
         TabuleiroGrid(
             tabuleiro = tabuleiro,
             linhaVitoria = linhaVitoria,
@@ -258,7 +254,6 @@ fun JogoDaVelhaScreen(modifier: Modifier = Modifier) {
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        // Botão para reiniciar o jogo
         Button(
             onClick = { mostrarDialogoReset = true },
             colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
@@ -274,7 +269,6 @@ fun JogoDaVelhaScreen(modifier: Modifier = Modifier) {
             )
         }
 
-        // Opção para Zerar Placar da Sessão
         TextButton(
             onClick = { mostrarDialogoZerarPlacar = true },
             modifier = Modifier.padding(top = 4.dp)
@@ -287,7 +281,6 @@ fun JogoDaVelhaScreen(modifier: Modifier = Modifier) {
         }
     }
 
-    // Diálogo de confirmação para reiniciar o jogo
     if (mostrarDialogoReset) {
         AlertDialog(
             onDismissRequest = { mostrarDialogoReset = false },
@@ -326,7 +319,6 @@ fun JogoDaVelhaScreen(modifier: Modifier = Modifier) {
         )
     }
 
-    // Diálogo de confirmação para zerar placar
     if (mostrarDialogoZerarPlacar) {
         AlertDialog(
             onDismissRequest = { mostrarDialogoZerarPlacar = false },
